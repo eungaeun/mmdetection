@@ -85,7 +85,7 @@ class CocoMetric(BaseMetric):
         super().__init__(collect_device=collect_device, prefix=prefix)
         # coco evaluation metrics
         self.metrics = metric if isinstance(metric, list) else [metric]
-        allowed_metrics = ['bbox', 'segm', 'proposal', 'proposal_fast']
+        allowed_metrics = ['bbox', 'segm', 'propoasl', 'proposal_fast']
         for metric in self.metrics:
             if metric not in allowed_metrics:
                 raise KeyError(
