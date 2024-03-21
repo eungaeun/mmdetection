@@ -10,9 +10,13 @@ from mmengine.runner import Runner
 from mmdet.utils import setup_cache_size_limit_of_dynamo
 
 
+config_1 = "_my_custom_config.py"  #jmlee
+config_2 = "pe_latest_version_config.py" #gaeun
+
+model_1 = "cascade"
 def parse_args():
     parser = argparse.ArgumentParser(description='Train a detector')
-    parser.add_argument('--config',default = "/workspace/mmdetection/configs/_my_custom_config.py", help='train config file path')
+    parser.add_argument('--config',default = f"/workspace/mmdetection/configs/{config_2}", help='train config file path')
     parser.add_argument('--work-dir', help='the dir to save logs and models')
     parser.add_argument(
         '--amp',

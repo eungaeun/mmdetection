@@ -6,8 +6,10 @@ model = dict(
         mean=[123.675, 116.28, 103.53],
         std=[58.395, 57.12, 57.375],
         bgr_to_rgb=True,
-        pad_mask=True,
+        pad_mask=False,
         pad_size_divisor=32),
+
+
     backbone=dict(
         type='ResNet',
         depth=50,
@@ -54,7 +56,7 @@ model = dict(
                 in_channels=256,
                 fc_out_channels=1024,
                 roi_feat_size=7,
-                num_classes=80,
+                num_classes=7,
                 bbox_coder=dict(
                     type='DeltaXYWHBBoxCoder',
                     target_means=[0., 0., 0., 0.],
@@ -71,7 +73,7 @@ model = dict(
                 in_channels=256,
                 fc_out_channels=1024,
                 roi_feat_size=7,
-                num_classes=80,
+                num_classes=7,
                 bbox_coder=dict(
                     type='DeltaXYWHBBoxCoder',
                     target_means=[0., 0., 0., 0.],
@@ -88,7 +90,7 @@ model = dict(
                 in_channels=256,
                 fc_out_channels=1024,
                 roi_feat_size=7,
-                num_classes=80,
+                num_classes=7,
                 bbox_coder=dict(
                     type='DeltaXYWHBBoxCoder',
                     target_means=[0., 0., 0., 0.],
@@ -105,14 +107,15 @@ model = dict(
             roi_layer=dict(type='RoIAlign', output_size=14, sampling_ratio=0),
             out_channels=256,
             featmap_strides=[4, 8, 16, 32]),
-        mask_head=dict(
-            type='FCNMaskHead',
-            num_convs=4,
-            in_channels=256,
-            conv_out_channels=256,
-            num_classes=80,
-            loss_mask=dict(
-                type='CrossEntropyLoss', use_mask=True, loss_weight=1.0))),
+        # mask_head=dict(
+        #     type='FCNMaskHead',
+        #     num_convs=4,
+        #     in_channels=256,
+        #     conv_out_channels=256,
+        #     num_classes=7,
+        #     loss_mask=dict(
+        #         type='CrossEntropyLoss', use_mask=False, loss_weight=1.0))
+                ),
     # model training and testing settings
     train_cfg=dict(
         rpn=dict(

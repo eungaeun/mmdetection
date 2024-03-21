@@ -6,7 +6,7 @@ model = dict(
         mean=[123.675, 116.28, 103.53],
         std=[58.395, 57.12, 57.375],
         bgr_to_rgb=True,
-        pad_mask=True,
+        pad_mask=False,
         pad_size_divisor=32),
     backbone=dict(
         type='ResNet',
@@ -72,7 +72,7 @@ model = dict(
             conv_out_channels=256,
             num_classes=80,
             loss_mask=dict(
-                type='CrossEntropyLoss', use_mask=True, loss_weight=1.0))),
+                type='CrossEntropyLoss', use_mask=False, loss_weight=1.0))),
     # model training and testing settings
     train_cfg=dict(
         rpn=dict(

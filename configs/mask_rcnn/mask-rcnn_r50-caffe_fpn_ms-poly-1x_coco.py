@@ -17,7 +17,7 @@ train_pipeline = [
     dict(
         type='LoadAnnotations',
         with_bbox=True,
-        with_mask=True,
+        with_mask=False,
         poly2mask=False),
     dict(
         type='RandomChoiceResize',

@@ -17,21 +17,26 @@ from mmdet.utils import setup_cache_size_limit_of_dynamo
 
 # TODO: support fuse_conv_bn and format_only
 def parse_args():
+    config_name = "pe_latest_version_config"
+    model_name= "cascade-mask-rnn"
     parser = argparse.ArgumentParser(
         description='MMDet test (and eval) a model')
-    parser.add_argument('config', help='test config file path')
-    parser.add_argument('checkpoint', help='checkpoint file')
+    parser.add_argument('--config', default= f"configs/{config_name}.py", help='test config file path')
+    parser.add_argument('--checkpoint', default= f"work_dirs/{config_name}/epoch_100.pth", help='checkpoint file')
     parser.add_argument(
         '--work-dir',
+        default= f"work_dirs/test/{model_name}/",
         help='the directory to save the file containing evaluation metrics')
     parser.add_argument(
         '--out',
+        default= f"{model_name}_results.pkl",
         type=str,
         help='dump predictions to a pickle file for offline evaluation')
     parser.add_argument(
-        '--show', action='store_true', help='show prediction results')
+        '--show', default= True, action='store_true', help='show prediction results')
     parser.add_argument(
         '--show-dir',
+        default= f"work_dirs/test/show_dir/{config_name}/",
         help='directory where painted images will be saved. '
         'If specified, it will be automatically saved '
         'to the work_dir/timestamp/show_dir')
