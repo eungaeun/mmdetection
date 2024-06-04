@@ -19,19 +19,21 @@ from mmdet.utils import setup_cache_size_limit_of_dynamo
 def parse_args():
     parser = argparse.ArgumentParser(
         description='MMDet test (and eval) a model')
-    parser.add_argument('config', help='test config file path')
-    parser.add_argument('checkpoint', help='checkpoint file')
+    parser.add_argument('--config', default = "..\configs\_base_\pe_config.py", help='test config file path')
+    parser.add_argument('--checkpoint', default= ".\work_dirs\pe_config\epoch_5.pth", help='checkpoint file')
     parser.add_argument(
-        '--work-dir',
+        '--work-dir', default= "results/",
         help='the directory to save the file containing evaluation metrics')
     parser.add_argument(
         '--out',
+        default= "swin_cpu_ep8_results.pkl",
         type=str,
         help='dump predictions to a pickle file for offline evaluation')
     parser.add_argument(
-        '--show', action='store_true', help='show prediction results')
+        '--show', default= True, action='store_true', help='show prediction results')
     parser.add_argument(
         '--show-dir',
+        default= "show_dir/swin_cpu_ep8/",
         help='directory where painted images will be saved. '
         'If specified, it will be automatically saved '
         'to the work_dir/timestamp/show_dir')

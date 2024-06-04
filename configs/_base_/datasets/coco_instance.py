@@ -1,6 +1,6 @@
 # dataset settings
 dataset_type = 'CocoDataset'
-data_root = 'data/coco/'
+data_root = '/workspace/mmdetection/data/coco/'
 
 # Example to use different file client
 # Method 1: simply set the data root and let the file I/O module
@@ -19,7 +19,7 @@ backend_args = None
 
 train_pipeline = [
     dict(type='LoadImageFromFile', backend_args=backend_args),
-    dict(type='LoadAnnotations', with_bbox=True, with_mask=True),
+    dict(type='LoadAnnotations', with_bbox=True, with_mask=False),
     dict(type='Resize', scale=(1333, 800), keep_ratio=True),
     dict(type='RandomFlip', prob=0.5),
     dict(type='PackDetInputs')
@@ -28,7 +28,7 @@ test_pipeline = [
     dict(type='LoadImageFromFile', backend_args=backend_args),
     dict(type='Resize', scale=(1333, 800), keep_ratio=True),
     # If you don't have a gt annotation, delete the pipeline
-    dict(type='LoadAnnotations', with_bbox=True, with_mask=True),
+    dict(type='LoadAnnotations', with_bbox=True, with_mask=False),
     dict(
         type='PackDetInputs',
         meta_keys=('img_id', 'img_path', 'ori_shape', 'img_shape',
@@ -67,7 +67,7 @@ test_dataloader = val_dataloader
 val_evaluator = dict(
     type='CocoMetric',
     ann_file=data_root + 'annotations/instances_val2017.json',
-    metric=['bbox', 'segm'],
+    metric=['bbox'],
     format_only=False,
     backend_args=backend_args)
 test_evaluator = val_evaluator
